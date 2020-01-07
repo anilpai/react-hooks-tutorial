@@ -1,8 +1,22 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import { useForm } from "./useForm"
 
 function App() {
-  const [values, handleChange] = useForm({email: '', password: ''})
+  const [values, handleChange] = useForm({email: '', password: '', firstName: ''})
+
+  useEffect(()=> {
+
+    const onMouseMove = e => {
+        console.log(e);
+    }
+
+    window.addEventListener("mousemove", onMouseMove)
+
+    return () => {
+      window.removeEventListener("mousemove", onMouseMove)
+    }
+
+  }, [])
 
   return (
     <div>
