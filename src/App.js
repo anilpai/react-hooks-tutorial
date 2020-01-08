@@ -1,22 +1,25 @@
-import React, {useEffect} from 'react'
+import React from 'react'
 import { useForm } from "./useForm"
+import { useFetch } from "./useFetch"
 
 function App() {
   const [values, handleChange] = useForm({email: '', password: '', firstName: ''})
 
-  useEffect(()=> {
+  useFetch("http://numbersapi.com/43/trivia")
 
-    const onMouseMove = e => {
-        console.log(e);
-    }
+  // useEffect(()=> {
 
-    window.addEventListener("mousemove", onMouseMove)
+  //   const onMouseMove = e => {
+  //       console.log(e);
+  //   }
 
-    return () => {
-      window.removeEventListener("mousemove", onMouseMove)
-    }
+  //   window.addEventListener("mousemove", onMouseMove)
 
-  }, [])
+  //   return () => {
+  //     window.removeEventListener("mousemove", onMouseMove)
+  //   }
+
+  // }, [])
 
   return (
     <div>
