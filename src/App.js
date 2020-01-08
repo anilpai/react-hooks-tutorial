@@ -5,23 +5,13 @@ import { useFetch } from "./useFetch"
 function App() {
   const [values, handleChange] = useForm({email: '', password: '', firstName: ''})
 
-  useFetch("http://numbersapi.com/43/trivia")
-
-  // useEffect(()=> {
-
-  //   const onMouseMove = e => {
-  //       console.log(e);
-  //   }
-
-  //   window.addEventListener("mousemove", onMouseMove)
-
-  //   return () => {
-  //     window.removeEventListener("mousemove", onMouseMove)
-  //   }
-
-  // }, [])
+  const {data, loading} = useFetch("http://numbersapi.com/43/trivia")
 
   return (
+    <>
+    <div>
+      {loading ? "loading......": data }
+    </div>
     <div>
       <input
         name="email"
@@ -35,6 +25,7 @@ function App() {
         onChange={handleChange}
       />
     </div>
+  </>
   );
 };
 
