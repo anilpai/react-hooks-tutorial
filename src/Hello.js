@@ -1,9 +1,27 @@
-import React, {useRef} from "react"
+import React, {useState, useEffect} from "react"
+import { useFetch } from "./useFetch"
 
 export const Hello = () => {
-    const renders = useRef(0)
+    // const renders = useRef(0)
 
-    console.log("hello component renders: ", renders.current++)
+      const [count, setCount] = useState(() => {
+        return JSON.parse(localStorage.getItem("count")) || 0;
+      });
 
-    return <div>Hello Component</div>
+        
+  const { data, loading } = useFetch(`http://numbersapi.com/${count}/trivia`);
+
+    useEffect(() => {
+      localStorage.setItem("count", JSON.stringify(count));
+    }, [count]);
+
+    return (
+      <div>
+        {" "}
+        <div>{loading ? "loading......" : data}</div>
+        <div>count: {count}</div>
+        <button onClick={() => setCount(c => c + 1)}>+</button>
+        <button onClick={() => setCount(c => c - 1)}>-</button>
+      </div>
+    );
 }
