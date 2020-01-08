@@ -2,17 +2,16 @@ import React, {useState, useEffect} from "react"
 import { useFetch } from "./useFetch"
 
 export const Hello = () => {
-    // const renders = useRef(0)
 
-      const [count, setCount] = useState(() => {
+    const [count, setCount] = useState(() => {
         return JSON.parse(localStorage.getItem("count")) || 0;
-      });
+    });
 
         
-  const { data, loading } = useFetch(`http://numbersapi.com/${count}/trivia`);
+    const { data, loading } = useFetch(`http://numbersapi.com/${count}/trivia`);
 
     useEffect(() => {
-      localStorage.setItem("count", JSON.stringify(count));
+        localStorage.setItem("count", JSON.stringify(count));
     }, [count]);
 
     return (

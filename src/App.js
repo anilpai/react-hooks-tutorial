@@ -11,6 +11,8 @@ function App() {
 
   const inputRef = useRef()
 
+  const hello = useRef(()=> console.log("hello"))
+
   const [showHello, setShowHello] = useState(true)
 
   return (
@@ -32,7 +34,8 @@ function App() {
         />
         <button
           onClick={()=> {
-            console.log(inputRef.current)
+            inputRef.current.focus()
+            hello.current()
           }}
         >focus</button>
       </div>
