@@ -1,6 +1,7 @@
 import React, {useState, useEffect, useRef} from 'react'
 import { useForm } from "./useForm"
 import { useFetch } from "./useFetch"
+import { Hello } from "./Hello"
 
 function App() {
   const [values, handleChange] = useForm({
@@ -18,6 +19,8 @@ function App() {
 
   const inputRef = useRef()
 
+  const [showHello, setShowHello] = useState(true)
+
   useEffect(()=> {
     localStorage.setItem("count", JSON.stringify(count))
   },[count])
@@ -29,6 +32,12 @@ function App() {
       <button onClick={() => setCount(c => c + 1)}>+</button>
       <button onClick={() => setCount(c => c - 1)}>-</button>
       <div>
+
+        <button onClick={()=>{
+          setShowHello(!showHello)
+        }}>toggle</button>
+        {showHello && <Hello />}
+
         <input ref={inputRef} name="email" value={values.email} placeholder="Email address" onChange={handleChange} />
         <input name="firstName" value={values.firstName} placeholder="First Name" onChange={handleChange} />
         <input
