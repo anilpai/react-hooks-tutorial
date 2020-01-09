@@ -13,3 +13,7 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 ### `yarn create react-app react-hooks-tutorial`
 
 Starts a new CRA project.
+
+### UseEffect vs UseLayoutEffect
+
+https://kentcdodds.com/blog/useeffect-vs-uselayouteffect
