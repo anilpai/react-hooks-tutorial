@@ -1,4 +1,4 @@
-import React, {useState, useRef, useLayoutEffect} from 'react'
+import React, {useState, useRef} from 'react'
 import { useForm } from "./useForm"
 import { Hello } from "./Hello"
 
@@ -14,10 +14,6 @@ function App() {
   const hello = useRef(()=> console.log("hello"))
 
   const [showHello, setShowHello] = useState(true)
-
-  useLayoutEffect(()=> {
-    console.log(inputRef.current.getBoundingClientRect())
-  }, [])
 
   return (
     <>
