@@ -1,6 +1,7 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef} from "react";
 import { useForm } from "./useForm";
 import { Hello } from "./Hello";
+import { useMeasure }from "./useMeasure"
 
 function App() {
   const [values, handleChange] = useForm({
@@ -14,6 +15,8 @@ function App() {
   const hello = useRef(() => console.log("hello"));
 
   const [showHello, setShowHello] = useState(true);
+
+  const [rect, inputRef2] = useMeasure([]);
 
   return (
     <>
@@ -35,6 +38,7 @@ function App() {
           onChange={handleChange}
         />
         <input
+          ref={inputRef2}
           name="firstName"
           value={values.firstName}
           placeholder="First Name"
@@ -55,6 +59,9 @@ function App() {
         >
           focus
         </button>
+        <pre>
+          {JSON.stringify(rect, null, 2)}
+        </pre>
       </div>
     </>
   );
