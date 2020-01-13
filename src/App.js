@@ -1,70 +1,37 @@
-import React, { useState, useRef} from "react";
-import { useForm } from "./useForm";
-import { Hello } from "./Hello";
-import { useMeasure }from "./useMeasure"
+import React, {useState} from "react";
+import {useFetch} from "./useFetch"
 
 function App() {
-  const [values, handleChange] = useForm({
-    email: "",
-    password: "",
-    firstName: ""
-  });
+  const [count, setCount] = useState(0)
+  const { data } = useFetch(
+    "https://raw.githubusercontent.com/ajzbc/kanye.rest/quotes/quotes.json"
+  );
 
-  const inputRef = useRef();
+  function computeLongestWord() {
+    if (!data) {
+      return []
+    }
 
-  const hello = useRef(() => console.log("hello"));
+    let longestWord = ''
 
-  const [showHello, setShowHello] = useState(true);
+    data.forEach(sentence => sentence.split(" ").forEach(word => {
+      if (word.length > longestWord.length){
+        longestWord = word
+      }
+    }))
 
-  const [rect, inputRef2] = useMeasure([]);
+    return longestWord;
+
+  } 
+
 
   return (
-    <>
-      <div>
-        <button
-          onClick={() => {
-            setShowHello(!showHello);
-          }}
-        >
-          toggle
-        </button>
-        {showHello && <Hello />}
-
-        <input
-          ref={inputRef}
-          name="email"
-          value={values.email}
-          placeholder="Email address"
-          onChange={handleChange}
-        />
-        <input
-          ref={inputRef2}
-          name="firstName"
-          value={values.firstName}
-          placeholder="First Name"
-          onChange={handleChange}
-        />
-        <input
-          type="password"
-          name="password"
-          placeholder="password"
-          value={values.password}
-          onChange={handleChange}
-        />
-        <button
-          onClick={() => {
-            inputRef.current.focus();
-            hello.current();
-          }}
-        >
-          focus
-        </button>
-        <pre>
-          {JSON.stringify(rect, null, 2)}
-        </pre>
-      </div>
-    </>
-  );
+    <div>
+      <div>count: {count}</div>
+      <button onClick={()=> setCount(count+1)}>increment</button>
+      <div>{computeLongestWord()}</div>
+    </div>
+  )
 }
 
 export default App;
