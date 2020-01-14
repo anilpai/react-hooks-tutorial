@@ -1,37 +1,44 @@
-import React, {useState} from "react";
-import {useFetch} from "./useFetch"
+import React, { useState, useMemo, useCallback } from "react";
+import { useFetch } from "./useFetch";
 
-function App() {
-  const [count, setCount] = useState(0)
+const App = () => {
+  const [count, setCount] = useState(0);
   const { data } = useFetch(
     "https://raw.githubusercontent.com/ajzbc/kanye.rest/quotes/quotes.json"
   );
 
-  function computeLongestWord() {
+  const computeLongestWord = useCallback(data => {
     if (!data) {
-      return []
+      return [];
     }
 
-    let longestWord = ''
+    console.log("computing the longest word ...");
 
-    data.forEach(sentence => sentence.split(" ").forEach(word => {
-      if (word.length > longestWord.length){
-        longestWord = word
-      }
-    }))
+    let longestWord = "";
+
+    data.forEach(sentence =>
+      sentence.split(" ").forEach(word => {
+        if (word.length > longestWord.length) {
+          longestWord = word;
+        }
+      })
+    );
 
     return longestWord;
+  }, []);
 
-  } 
-
+  const longestWord = useMemo(() => computeLongestWord(data), [
+    data,
+    computeLongestWord
+  ]);
 
   return (
     <div>
       <div>count: {count}</div>
-      <button onClick={()=> setCount(count+1)}>increment</button>
-      <div>{computeLongestWord()}</div>
+      <button onClick={() => setCount(count + 1)}>increment</button>
+      <div>{longestWord}</div>
     </div>
-  )
-}
+  );
+};
 
 export default App;
