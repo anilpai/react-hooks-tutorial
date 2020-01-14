@@ -26,7 +26,9 @@ const App = () => {
       >
         <input value={text} onChange={e => setText(e.target.value)} />
       </form>
-      <pre>{JSON.stringify(todos, null, 2)}</pre>
+      {todos.map(t => (
+        <div key={t.text}>{t.text}</div>
+      ))}
     </div>
   );
 };
