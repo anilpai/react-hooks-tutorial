@@ -23,3 +23,6 @@ https://kentcdodds.com/blog/useeffect-vs-uselayouteffect
 
 useMemo -> returns a memoized value
 useCallback -> returns a memoized function
+
+
+useReducer -> alternative to useState
