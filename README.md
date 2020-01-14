@@ -17,3 +17,9 @@ Starts a new CRA project.
 ### UseEffect vs UseLayoutEffect
 
 https://kentcdodds.com/blog/useeffect-vs-uselayouteffect
+
+
+### Notes
+
+useMemo -> returns a memoized value
+useCallback -> returns a memoized function
