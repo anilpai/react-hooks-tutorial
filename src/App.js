@@ -5,8 +5,8 @@ import { About } from "./pages/about";
 import { UserContext } from "./UserContext";
 
 const App = () => {
-  const [value, setValue] = useState("initial context value");
-  const providerValue = useMemo(() => ({ value, setValue }), [value, setValue]);
+  const [user, setUser] = useState(null);
+  const value = useMemo(() => ({ user, setUser }), [user, setUser]);
   return (
     <Router>
       <div>
@@ -20,7 +20,7 @@ const App = () => {
             </li>
           </ul>
         </nav>
-        <UserContext.Provider value={providerValue}>
+        <UserContext.Provider value={value}>
           <Route path="/" exact component={Index} />
           <Route path="/about/" component={About} />
         </UserContext.Provider>
