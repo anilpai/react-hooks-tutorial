@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import { Index } from "./pages";
 import { About } from "./pages/about";
@@ -6,6 +6,7 @@ import { UserContext } from "./UserContext";
 
 const App = () => {
   const [value, setValue] = useState("initial context value");
+  const providerValue = useMemo(() => ({ value, setValue }), [value, setValue]);
   return (
     <Router>
       <div>
@@ -19,7 +20,7 @@ const App = () => {
             </li>
           </ul>
         </nav>
-        <UserContext.Provider value={{ value, setValue }}>
+        <UserContext.Provider value={providerValue}>
           <Route path="/" exact component={Index} />
           <Route path="/about/" component={About} />
         </UserContext.Provider>
