@@ -8,14 +8,18 @@ export function About() {
     <div>
       <h2>About</h2>
       <pre>{JSON.stringify(user, null, 2)}</pre>
-      <button
-        onClick={async () => {
-          const user = await login();
-          setUser(user);
-        }}
-      >
-        click me!
-      </button>
+      {user ? (
+        <button onClick={() => setUser(null)}>logout</button>
+      ) : (
+        <button
+          onClick={async () => {
+            const user = await login();
+            setUser(user);
+          }}
+        >
+          login
+        </button>
+      )}
     </div>
   );
 }
